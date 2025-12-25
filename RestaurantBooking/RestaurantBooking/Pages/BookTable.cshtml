@@ -1,0 +1,78 @@
+﻿@page
+@model RestaurantBooking.Pages.BookTableModel
+
+<h1>Boka bord</h1>
+
+<form method="post">
+    <div>
+        <label>Namn</label><br />
+        <input asp-for="Booking.Name" />
+        <span asp-validation-for="Booking.Name"></span>
+    </div>
+
+    <div>
+        <label>Email</label><br />
+        <input asp-for="Booking.Email" />
+        <span asp-validation-for="Booking.Email"></span>
+    </div>
+
+    <div>
+        <label>Antal gäster</label><br />
+        <input type="number" asp-for="Booking.Guests" />
+        <span asp-validation-for="Booking.Guests"></span>
+    </div>
+
+    <div>
+        <label>Datum</label><br />
+        <input type="date" asp-for="Booking.Date" />
+        <span asp-validation-for="Booking.Date"></span>
+    </div>
+
+    <button type="submit">Boka</button>
+</form>
+
+
+
+
+@* Bootstrap-stylized version 
+    <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <h1 class="mb-4 text-center">Boka bord</h1>
+
+            <form method="post" class="card p-4 shadow">
+
+                <div class="mb-3">
+                    <label class="form-label">Namn</label>
+                    <input class="form-control" asp-for="Booking.Name" />
+                    <span class="text-danger" asp-validation-for="Booking.Name"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input class="form-control" asp-for="Booking.Email" />
+                    <span class="text-danger" asp-validation-for="Booking.Email"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Antal gäster</label>
+                    <input type="number" class="form-control" asp-for="Booking.Guests" />
+                    <span class="text-danger" asp-validation-for="Booking.Guests"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Datum</label>
+                    <input type="date" class="form-control" asp-for="Booking.Date" />
+                    <span class="text-danger" asp-validation-for="Booking.Date"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    Boka bord
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</div> *@
