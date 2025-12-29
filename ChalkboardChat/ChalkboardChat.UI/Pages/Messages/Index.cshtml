@@ -1,0 +1,25 @@
+﻿@page
+@model ChalkboardChat.Ui.Pages.Messages.IndexModel
+
+<h2>Message Board</h2>
+
+<form method="post" class="mb-3">
+    <textarea name="message" class="form-control" rows="3"
+              placeholder="Write your message here..."></textarea>
+    <button type="submit" class="btn btn-primary mt-2">Post</button>
+</form>
+
+<hr />
+
+@foreach (var msg in Model.Messages)
+{
+    var isMine = msg.Username == User.Identity?.Name;
+
+    <div class="p-2 mb-2 border rounded @(isMine ? "bg-info bg-opacity-25" : "")">
+        <strong>@msg.Username</strong>
+        <span class="text-muted">
+            (@msg.Date.ToLocalTime())
+        </span>
+        <p>@msg.Message</p>
+    </div>
+}

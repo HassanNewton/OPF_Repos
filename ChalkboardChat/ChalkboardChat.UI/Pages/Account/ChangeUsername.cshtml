@@ -1,0 +1,13 @@
+﻿@page
+@model ChalkboardChat.Ui.Pages.Account.ChangeUsernameModel
+
+<h2>Change Username</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">New username</label>
+        <input asp-for="NewUsername" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Change</button>
+</form>
