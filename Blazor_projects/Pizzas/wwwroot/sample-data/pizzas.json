@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Margherita",
+    "description": "Classic tomato, mozzarella and basil.",
+    "deliciousness": 6,
+    "imageUrl": "images/margarita.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Capricciosa",
+    "description": "Tomato sauce, cheese, mushroom, ham, olive and artichoke.",
+    "deliciousness": 8,
+    "imageUrl": "images/capricciosa.jpg"
+  }
+]

@@ -1,0 +1,109 @@
+﻿@page "/pizza/{Id:int}"
+@* // Routedefinition med parameter.
+// {Id:int} betyder att URL:en måste innehålla ett heltal,
+// t.ex. /pizza/3 *@
+
+@inject HttpClient Http
+@* // HttpClient används för att hämta pizzadatan från JSON-filen. *@
+
+@using Pizzas.Models
+@* // Gör att vi kan använda PizzaModel utan att skriva fullt namespace. *@
+
+@if (pizza == null)
+{
+    // Så länge pizzan inte är laddad visas en loading-text.
+    // Detta händer eftersom datan hämtas asynkront.
+    <p>Loading pizza...</p>
+}
+else
+{
+    // När pizzan har hittats visas innehållet.
+
+    <h3>@pizza.Name</h3>
+    // Visar pizzans namn
+
+    <img src="@pizza.ImageUrl" style="width:300px" />
+    // Bilden hämtas från wwwroot/images via ImageUrl
+
+    <p>🔥 Deliciousness: @pizza.Deliciousness</p>
+    // Visar nuvarande deliciousness-värde
+
+    @if (pizza.Deliciousness > 8)
+    {
+        // Extra meddelande om pizzan blivit väldigt delicious
+        <p><strong>OMG! I can’t handle the deliciousness!</strong></p>
+    }
+
+    <button @onclick="ToggleInfo">
+        Toggle info
+    </button>
+    // Knapp som visar/döljer pizzans beskrivning
+
+    <button @onclick="MakeMoreDelicious">
+        Make more delicious
+    </button>
+    // Knapp som ökar deliciousness-värdet med 1
+
+    @if (showInfo)
+    {
+        // Description visas bara om showInfo är true
+        <p>@pizza.Description</p>
+    }
+
+    @if (!string.IsNullOrEmpty(message))
+    {
+        // Meddelande visas t.ex. om pizzan redan är maxad
+        <p><em>@message</em></p>
+    }
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    // Detta värde kommer från URL:en (/pizza/{Id})
+    // Blazor mappar automatiskt route-parametern till denna property.
+
+    PizzaModel? pizza;
+    // Den pizza som matchar Id:t från URL:en.
+    // Nullable eftersom den inte finns direkt vid start.
+
+    bool showInfo = false;
+    // Styr om beskrivningen ska visas eller inte.
+
+    string message = "";
+    // Används för att visa feedback till användaren.
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Körs när komponenten skapas.
+        // Hämtar alla pizzor från JSON-filen.
+        var pizzas = await Http.GetFromJsonAsync<List<PizzaModel>>(
+            "sample-data/pizzas.json");
+
+        // Letar upp den pizza vars Id matchar URL-parametern.
+        pizza = pizzas?.FirstOrDefault(p => p.Id == Id);
+    }
+
+    void ToggleInfo()
+    {
+        // Växlar mellan att visa och dölja beskrivningen.
+        showInfo = !showInfo;
+    }
+
+    void MakeMoreDelicious()
+    {
+        // Förhindrar att deliciousness går över 10.
+        if (pizza!.Deliciousness >= 10)
+        {
+            message = "This pizza is already too delicious for its own good!";
+            return;
+        }
+
+        // Ökar deliciousness med 1.
+        pizza.Deliciousness++;
+
+        // Rensar eventuellt varningsmeddelande.
+        message = "";
+    }
+}
+

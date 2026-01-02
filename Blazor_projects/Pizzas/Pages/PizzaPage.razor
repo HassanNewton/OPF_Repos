@@ -1,0 +1,94 @@
+﻿@page "/pizzas"
+ @* Detta är routen till sidan.
+När användaren går till /pizzas visas denna komponent. *@
+
+@inject HttpClient Http
+@* // HttpClient används för att hämta data (JSON) från wwwroot/sample-data.
+// Samma mönster som i FetchData-exemplet. *@
+
+@inject NavigationManager Nav
+@* // NavigationManager används för att navigera programmatiskt
+// till andra sidor (t.ex. pizzadetaljsidan). *@
+
+@using Pizzas.Models
+@* // Gör att vi kan använda PizzaModel utan att skriva fullständigt namespace. *@
+
+<h3>Our Pizzas</h3>
+
+@if (pizzas == null)
+{
+    // Så länge datan inte är laddad visas en "loading"-text.
+    // Detta är viktigt eftersom datan hämtas asynkront.
+    <p>Loading pizzas...</p>
+}
+else
+{
+    // När pizzorna är laddade renderas listan.
+    <div class="pizza-grid">
+        @foreach (var pizza in pizzas)
+        {
+            // Varje pizza visas som ett kort (card).
+            // CSS-klassen "selected" läggs till om pizzan är markerad.
+            <div class="pizza-card @GetSelectedClass(pizza.Id)"
+                 @onclick="() => OnPizzaClick(pizza.Id)">
+                @* // Klick-eventet skickar med pizzans id
+                // så vi vet vilken pizza användaren klickade på. *@
+
+                <img src="@pizza.ImageUrl" />
+                @* // Bilden laddas från wwwroot/images via ImageUrl *@
+
+                <h4>@pizza.Name</h4>
+                @* // Pizzans namn *@
+
+                <p>🔥 @pizza.Deliciousness</p>
+                @* // Visar pizzans deliciousness-värde *@
+            </div>
+        }
+    </div>
+}
+
+@code {
+    // Lista som kommer innehålla alla pizzor från JSON-filen
+    List<PizzaModel>? pizzas;
+
+    // Sparar id:t på den pizza som senast klickades på
+    // Nullable eftersom ingen pizza är vald från början
+    int? selectedPizzaId;
+
+    // Räknar hur många gånger samma pizza klickats
+    int clickCount = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Körs automatiskt när komponenten skapas.
+        // Hämtar pizzadatan från sample-data mappen.
+        pizzas = await Http.GetFromJsonAsync<List<PizzaModel>>(
+            "sample-data/pizzas.json");
+    }
+
+    void OnPizzaClick(int id)
+    {
+        // Om användaren klickar på en NY pizza
+        // markerar vi den och återställer klickräknaren
+        if (selectedPizzaId != id)
+        {
+            selectedPizzaId = id;
+            clickCount = 1;
+            return;
+        }
+
+        // Om samma pizza klickas igen ökar vi klickräknaren
+        clickCount++;
+
+        // Vid andra klicket navigerar vi till detaljsidan
+        if (clickCount == 2)
+        {
+            Nav.NavigateTo($"/pizza/{id}");
+        }
+    }
+
+    string GetSelectedClass(int id)
+        // Returnerar CSS-klassen "selected" om pizzan är vald.
+        // Annars returneras en tom sträng.
+        => selectedPizzaId == id ? "selected" : "";
+}
