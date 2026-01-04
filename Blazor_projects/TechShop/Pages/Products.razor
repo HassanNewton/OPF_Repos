@@ -1,0 +1,51 @@
+﻿@page "/products"
+@inject HttpClient Http
+@inject NavigationManager Nav
+@using TechShop.Models
+
+<h3>Tech Shop</h3>
+
+<input placeholder="Search products..."
+       @bind="searchText"
+       @bind:event="oninput" />
+
+@if (products == null)
+{
+    <p>Loading products...</p>
+}
+else
+{
+    <div class="product-grid">
+        @foreach (var product in FilteredProducts)
+        {
+            <div class="product-card"
+                 @onclick="() => GoToProduct(product.Id)">
+
+                <img src="@product.ImageUrl" />
+                <h4>@product.Name</h4>
+                <p>@product.Price SEK</p>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    List<ProductModel>? products;
+    string searchText = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await Http.GetFromJsonAsync<List<ProductModel>>(
+            "sample-data/products.json");
+    }
+
+    IEnumerable<ProductModel> FilteredProducts =>
+        products!.Where(p =>
+            string.IsNullOrWhiteSpace(searchText) ||
+            p.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase));
+
+    void GoToProduct(int id)
+    {
+        Nav.NavigateTo($"/product/{id}");
+    }
+}

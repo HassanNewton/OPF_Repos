@@ -1,0 +1,37 @@
+﻿@page "/checkout"
+@using Blazored.LocalStorage
+@using TechShop.Services
+@inject HttpClient Http
+@inject CartService Cart
+@inject ILocalStorageService LocalStorage
+
+<h3>Checkout</h3>
+
+@if (!Cart.Items.Any())
+{
+    <p>No products to checkout.</p>
+}
+else
+{
+    <p><strong>Total price: @Cart.TotalPrice SEK</strong></p>
+
+    <button @onclick="ConfirmOrder">
+        Confirm order
+    </button>
+}
+
+@code {
+    async Task ConfirmOrder()
+    {
+        var orders =
+           await LocalStorage.GetItemAsync<List<DateTime>>("orders")
+           ?? new List<DateTime>();
+
+        orders.Add(DateTime.Now);
+
+        await LocalStorage.SetItemAsync("orders", orders);
+
+        await Cart.ClearAsync();
+    }
+}
+

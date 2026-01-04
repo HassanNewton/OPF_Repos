@@ -1,0 +1,36 @@
+﻿@page "/cart"
+@using TechShop.Services
+@inject CartService C
+
+<h3>Your Cart</h3>
+
+@if (!C.Items.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <ul>
+        @foreach (var item in C.Items)
+        {
+            <li>@item.Name – @item.Price SEK</li>
+        }
+    </ul>
+
+    <p><strong>Total: @C.TotalPrice SEK</strong></p>
+
+    <button><a href="/checkout">Go to checkout</a></button>
+    
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        C.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        C.OnChange -= StateHasChanged;
+    }
+}

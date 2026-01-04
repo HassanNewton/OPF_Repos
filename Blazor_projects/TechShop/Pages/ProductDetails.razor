@@ -1,0 +1,50 @@
+﻿@page "/product/{Id:int}"
+@inject HttpClient Http
+@inject CartService Cart
+@inject NavigationManager Nav
+@using TechShop.Models
+@using TechShop.Services
+
+@if (product == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h3>@product.Name</h3>
+    <img src="@product.ImageUrl" style="width:300px" />
+    <p>@product.Description</p>
+    <p><strong>@product.Price SEK</strong></p>
+
+    <button @onclick="AddToCart">
+        Add to cart
+    </button>
+    <button @onclick="GoBack">
+        Go Back
+    </button>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    ProductModel? product;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var products = await Http.GetFromJsonAsync<List<ProductModel>>(
+            "sample-data/products.json");
+
+        product = products?.FirstOrDefault(p => p.Id == Id);
+    }
+
+    async void AddToCart()
+    {
+        await Cart.AddAsync(product!);
+    }
+
+    void GoBack()
+    {
+        Nav.NavigateTo($"/Products");
+    }
+}
