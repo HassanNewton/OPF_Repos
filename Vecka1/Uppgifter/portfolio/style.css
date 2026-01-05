@@ -1,0 +1,59 @@
+/* ====== GRUND ====== */
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* ====== HEADER ====== */
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* ====== PROFIL ====== */
+
+.profile {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.profile img {
+  width: 200px;
+  border-radius: 10px;
+}
+
+/* ====== SKILLS ====== */
+
+.skills ul {
+  list-style-type: square;
+}
+
+/* ====== PROJEKT ====== */
+
+.projects {
+  margin-bottom: 40px;
+}
+
+.project-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* ====== FOOTER ====== */
+
+.footer {
+  text-align: center;
+  margin-top: 40px;
+}
