@@ -1,0 +1,103 @@
+/* ÖVNING 1 */
+.name {
+  font-size: 32px;
+}
+
+/* ÖVNING 2 */
+.n1 {
+  color: red;
+}
+.n2 {
+  color: orange;
+}
+.n3 {
+  color: yellow;
+}
+.n4 {
+  color: green;
+}
+.n5 {
+  color: blue;
+}
+.n6 {
+  color: purple;
+}
+.n7 {
+  color: brown;
+}
+.n8 {
+  color: pink;
+}
+.n9 {
+  color: teal;
+}
+.n10 {
+  color: black;
+}
+
+/* ÖVNING 3 */
+.tahoma-name {
+  font-family: Tahoma, sans-serif;
+}
+
+/* ÖVNING 4 */
+.font1 {
+  font-family: Arial;
+}
+.font2 {
+  font-family: Georgia;
+}
+.font3 {
+  font-family: "Courier New";
+}
+.font4 {
+  font-family: Verdana;
+}
+
+/* ÖVNING 5 */
+.book-title {
+  font-size: 28px;
+}
+
+.author {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.summary {
+  font-size: 16px;
+}
+
+/* ÖVNING 6 */
+.l1 {
+  color: red;
+  font-size: 20px;
+}
+.l2 {
+  color: blue;
+  font-size: 22px;
+}
+.l3 {
+  color: green;
+  font-size: 24px;
+}
+.l4 {
+  color: orange;
+  font-size: 26px;
+}
+.l6 {
+  color: purple;
+  font-size: 28px;
+}
+.l7 {
+  color: brown;
+  font-size: 30px;
+}
+.l8 {
+  color: pink;
+  font-size: 32px;
+}
+.l9 {
+  color: teal;
+  font-size: 34px;
+}

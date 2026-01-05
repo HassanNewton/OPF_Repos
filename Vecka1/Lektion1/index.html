@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML & CSS Grundexempel</title>
+
+    <!-- Kopplar extern CSS-fil -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- HEADER (block-element) -->
+    <header class="site-header">
+      <h1>Min första webbplats</h1>
+      <p>HTML struktur + CSS styling</p>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="navigation">
+      <a href="#">Start</a>
+      <a href="#">Produkter</a>
+      <a href="#">Kontakt</a>
+    </nav>
+
+    <!-- HUVUDINNEHÅLL -->
+    <main class="content">
+      <!-- KORT / CARD -->
+      <div class="card">
+        <h2>Vad är HTML?</h2>
+        <p>
+          HTML beskriver <span class="highlight">struktur</span> och
+          <span class="highlight">innehåll</span> på en webbsida.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Block vs Inline</h2>
+        <p>
+          Ett <strong>block-element</strong> tar hela raden medan ett
+          <span class="highlight">inline-element</span> bara tar den plats det
+          behöver.
+        </p>
+
+        <div class="box">Jag är ett block</div>
+        <div class="box">Jag är också ett block</div>
+
+        <p>
+          Inline-exempel:
+          <span class="inline-example">ett</span>
+          <span class="inline-example">två</span>
+          <span class="inline-example">tre</span>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Länkar</h2>
+        <p>
+          Länkar är inline-element:
+          <a href="#">Länk 1</a>
+          <a href="#">Länk 2</a>
+        </p>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <p>© 2026 – HTML & CSS grund</p>
+    </footer>
+  </body>
+</html>

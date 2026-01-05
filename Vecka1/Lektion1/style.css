@@ -1,0 +1,71 @@
+/* ====== GRUNDSTYLING ====== */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+}
+
+/* ====== HEADER ====== */
+
+.site-header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+/* ====== NAVIGATION ====== */
+
+.navigation {
+  background-color: #555;
+  padding: 10px;
+}
+
+.navigation a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+/* ====== HUVUDINNEHÅLL ====== */
+
+.content {
+  padding: 20px;
+}
+
+/* CARD = återanvändbar klass */
+.card {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+/* ====== BLOCK VS INLINE ====== */
+
+.box {
+  background-color: lightblue;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Inline-element */
+.inline-example {
+  background-color: yellow;
+  padding: 3px;
+}
+
+/* Markerad text */
+.highlight {
+  color: red;
+  font-weight: bold;
+}
+
+/* ====== FOOTER ====== */
+
+.site-footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
