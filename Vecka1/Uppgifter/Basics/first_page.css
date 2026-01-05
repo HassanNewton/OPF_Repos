@@ -1,0 +1,13 @@
+/* Endast för first_page.html */
+
+body {
+  background-color: #f0f8ff;
+}
+
+img {
+  margin-top: 10px;
+}
+
+#bild1 {
+  width: 10%;
+}

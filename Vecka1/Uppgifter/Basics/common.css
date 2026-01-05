@@ -1,0 +1,11 @@
+/* Gemensamma regler för båda sidor */
+
+body {
+  color: blue;
+  font-family: Arial, sans-serif;
+}
+
+h1,
+h2 {
+  font-family: Tahoma, sans-serif;
+}
