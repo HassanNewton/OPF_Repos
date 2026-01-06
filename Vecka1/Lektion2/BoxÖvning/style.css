@@ -1,0 +1,64 @@
+.wrapper {
+  display: flex;
+  gap: 40px;
+}
+
+.container {
+  width: 160px;
+  height: 160px;
+  background: #eee;
+  display: flex;
+}
+
+/* BOXARNA */
+.box {
+  width: 20px;
+  height: 20px;
+  background: #e86b6b;
+}
+
+/* 1️⃣ Row + space-between (vänster–mitten–höger) */
+.row-between {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 2️⃣ Column + space-between (topp–mitten–botten) */
+.column-between {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 3️⃣ Column + space-around */
+.column-around {
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* 4️⃣ Row + space-around */
+.row-around {
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.align-self-demo {
+  width: 160px;
+  height: 160px;
+  background: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.middle {
+  align-self: center;
+}
+/* 🔥 Denna bryter mönstret */
+.end {
+  align-self: flex-end;
+}
