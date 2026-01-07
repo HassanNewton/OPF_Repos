@@ -1,0 +1,23 @@
+/* Hello World-div */
+#hello-world-div {
+  background-color: lightblue;
+  padding: 10px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+/* Divar skapade från input */
+.text-item {
+  background-color: lightgreen;
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+/* Visuell feedback */
+.text-item:hover {
+  background-color: #9be79b;
+}
+/* 
+ID används för ett unikt element
+class används för flera likadana element */

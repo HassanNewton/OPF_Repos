@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DOM-a-rama</title>
+
+    <!-- Kopplar in CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>DOM-a-rama</h1>
+
+    <!-- Knapp 1: Skapa Hello World -->
+    <button id="helloBtn">Skapa Hello World</button>
+
+    <hr />
+
+    <!-- Input + knapp för egen text -->
+    <input type="text" id="textInput" placeholder="Skriv något..." />
+    <button id="addTextBtn">Lägg till text</button>
+
+    <hr />
+
+    <!-- Knapp 3: Ta bort allt -->
+    <button id="clearBtn">Ta bort alla element</button>
+
+    <!-- Här hamnar alla skapade divar -->
+    <div id="container"></div>
+
+    <!-- Kopplar in JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
+<!-- 
+container är förälderelementet där allt nytt hamnar
+Vi jobbar inte direkt i body → lättare att rensa -->

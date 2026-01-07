@@ -1,0 +1,7 @@
+/* Tillgänglighet: respektera reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-hover,
+  .lift-on-hover {
+    transition: none !important;
+  }
+}
