@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Coffee App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>☕ Coffee Collection</h1>
+
+    <!-- FORM: skapa ny coffee -->
+    <section class="form">
+      <input id="name" placeholder="Name" />
+      <input id="origin" placeholder="Origin" />
+      <input id="strength" type="number" placeholder="Strength (1–10)" />
+      <button onclick="addCoffee()">Add Coffee</button>
+    </section>
+
+    <!-- FELMEDDELANDEN -->
+    <p id="error" class="error"></p>
+
+    <!-- LISTA -->
+    <section id="coffee-list" class="grid"></section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
+<!-- HTML är dum → ingen logik
+Inputs matchar exakt Coffee-modellen
+coffee-list är där JS kommer rendera cards -->
