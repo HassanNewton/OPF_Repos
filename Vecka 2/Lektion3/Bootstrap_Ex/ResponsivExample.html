@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- Gör sidan responsiv på mobil -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Bootstrap – Grunder</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <!-- ================= NAVBAR ================= -->
+    <!-- En enkel responsiv meny -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="container">
+        <!-- Logotyp / titel -->
+        <a class="navbar-brand" href="#">MySite</a>
+
+        <!-- Meny-knapp (visas på mobil) -->
+        <button
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#menu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menyinnehåll -->
+        <div id="menu" class="collapse navbar-collapse">
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ================= GRID ================= -->
+    <div class="container mt-4">
+      <!-- ===== Exempel 1: Enkel responsiv grid ===== -->
+      <div class="row">
+        <!--
+      col-sm-12 → full bredd på små skärmar
+      col-md-6  → halva bredden på medium
+      col-lg-2  → smal kolumn på stora skärmar
+    -->
+        <div class="col-sm-12 col-md-6 col-lg-2 bg-light p-3 border">
+          Col One
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-8 bg-light p-3 border">
+          Col Two
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- ===== Exempel 2: Ändra ordning ===== -->
+      <div class="row">
+        <!-- order-sm-* ändrar ordning på små skärmar -->
+        <div class="col-sm-6 order-sm-2 bg-light p-3 border">Col One</div>
+        <div class="col-sm-6 order-sm-1 bg-light p-3 border">Col Two</div>
+      </div>
+
+      <hr />
+
+      <!-- ===== Exempel 3: Offset (luft till vänster) ===== -->
+      <div class="row">
+        <!-- offset-2 = två tomma kolumner till vänster -->
+        <div class="col-sm-4 offset-2 bg-light p-3 border">Col One</div>
+
+        <div class="col-sm-4 offset-1 bg-light p-3 border">Col Two</div>
+      </div>
+
+      <hr />
+
+      <!-- ================= FLEX ================= -->
+      <!-- Bootstrap använder Flexbox bakom kulisserna -->
+      <div
+        class="row justify-content-center align-items-center"
+        style="height: 200px"
+      >
+        <!-- justify-content-center = centrerar horisontellt -->
+        <!-- align-items-center = centrerar vertikalt -->
+
+        <div class="col-sm-4">
+          <div class="p-3 bg-light border text-center">Center</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- ================= BUTTONS ================= -->
+      <h3>Knappar</h3>
+
+      <!-- btn + färgklass -->
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-success">Success</button>
+      <button class="btn btn-danger">Danger</button>
+
+      <hr />
+
+      <!-- ================= CARDS ================= -->
+      <h3>Cards</h3>
+
+      <div class="row">
+        <!-- Två kort per rad på små skärmar -->
+        <div class="col-sm-6 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Card One</h5>
+              <p class="card-text">Ett enkelt Bootstrap-kort.</p>
+              <a href="#" class="btn btn-primary">Knapp</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Card Two</h5>
+              <p class="card-text">Responsiv layout utan media queries.</p>
+              <a href="#" class="btn btn-secondary">Knapp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS (krävs för navbar) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+<!-- 
+col-sm-*	≥ 576px
+col-md-*	≥ 768px
+col-lg-*	≥ 992px 
+-->
