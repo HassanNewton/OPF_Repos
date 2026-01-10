@@ -1,0 +1,15 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+li {
+  cursor: pointer;
+  margin: 0.5rem 0;
+}
+
+li.done {
+  text-decoration: line-through;
+  color: gray;
+}
