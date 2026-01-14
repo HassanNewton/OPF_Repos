@@ -7,7 +7,7 @@
  * - Förstå asynkron JavaScript (Promises & async/await)
  ***********************************************************************/
 
-const URL = "https://api.example.com/users";
+const API_URL = "https://jsonplaceholder.typicode.com/todos";
 
 /***********************************************************************
  * 1️ FETCH + .then()  (Promise-kedja – mellansteget)
@@ -16,7 +16,7 @@ const URL = "https://api.example.com/users";
 function fetchWithThen() {
   console.log("START fetchWithThen");
 
-  fetch(URL)
+  fetch(API_URL)
     .then((response) => {
       // response är INTE datan
       // det är ett HTTP-svar (status, headers, body)
@@ -32,6 +32,7 @@ function fetchWithThen() {
 
   console.log("SLUT fetchWithThen");
 }
+fetchWithThen();
 
 /***********************************************************************
  * 2️⃣ AXIOS + .then()
@@ -41,7 +42,7 @@ function axiosWithThen() {
   console.log("START axiosWithThen");
 
   axios
-    .get(URL)
+    .get(API_URL)
     .then((response) => {
       // Axios gör automatiskt:
       // 1. HTTP-anropet
@@ -62,7 +63,7 @@ function axiosWithThen() {
 async function fetchWithAsyncAwait() {
   console.log("START fetchWithAsyncAwait");
 
-  const response = await fetch(URL);
+  const response = await fetch(API_URL);
   const data = await response.json();
 
   console.log("DATA:", data);
@@ -78,7 +79,7 @@ async function fetchWithTryCatch() {
   console.log("START fetchWithTryCatch");
 
   try {
-    const response = await fetch(URL);
+    const response = await fetch(API_URL);
 
     // Fetch kastar INTE fel automatiskt vid 404/500
     if (!response.ok) {
@@ -102,7 +103,7 @@ async function axiosWithAsyncAwait() {
   console.log("START axiosWithAsyncAwait");
 
   try {
-    const response = await axios.get(URL);
+    const response = await axios.get(API_URL);
 
     // Axios kastar automatiskt fel vid 404/500
     console.log("DATA:", response.data);
