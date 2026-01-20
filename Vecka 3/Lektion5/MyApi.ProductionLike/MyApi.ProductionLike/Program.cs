@@ -19,6 +19,40 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Service-lager (Scoped, samma livslängd som DbContext)
 builder.Services.AddScoped<IProductService, ProductService>();
 
+
+// ------------------------------------------------------------
+// CORS – Cross-Origin Resource Sharing
+// ------------------------------------------------------------
+//
+// CORS behövs när frontend och backend körs på OLIKA origins
+// (t.ex. frontend: http://localhost:5500
+//        backend:  https://localhost:5001)
+//
+// Browsern blockerar annars anropen.
+//
+builder.Services.AddCors(options =>
+{
+options.AddPolicy("FrontendPolicy", policy =>
+{
+    policy
+        // ÄNDRA DENNA URL TILL DIN FRONTEND
+        // Exempel:
+        // - http://localhost:5500 (Live Server, VS Code)
+        // - http://localhost:5173 (Vite)
+        // - http://localhost:3000 (React)
+        .WithOrigins("http://localhost:5500")
+
+        // Tillåt alla HTTP-metoder (GET, POST, PUT, DELETE)
+        .AllowAnyMethod()
+
+        // Tillåt alla headers (Content-Type, Authorization m.m.)
+        .AllowAnyHeader();
+
+    // Om du använder cookies eller auth-token i framtiden:
+    // .AllowCredentials();
+});
+
+
 // ------------------------------------------------------------
 // Redo för AI-labb (nästa steg):
 // Här registrerar man t.ex. en AI-service som använder en extern klient.
