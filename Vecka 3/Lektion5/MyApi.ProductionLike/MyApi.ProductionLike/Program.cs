@@ -32,26 +32,22 @@ builder.Services.AddScoped<IProductService, ProductService>();
 //
 builder.Services.AddCors(options =>
 {
-options.AddPolicy("FrontendPolicy", policy =>
-{
-    policy
-        // ÄNDRA DENNA URL TILL DIN FRONTEND
-        // Exempel:
-        // - http://localhost:5500 (Live Server, VS Code)
-        // - http://localhost:5173 (Vite)
-        // - http://localhost:3000 (React)
-        .WithOrigins("http://localhost:5500")
+    options.AddPolicy("FrontendPolicy", policy =>
+    {
+        policy
+            // ÄNDRA DENNA URL TILL DIN FRONTEND
+            // Exempel:
+            
+            .WithOrigins("http://127.0.0.1:5500")
+            // Tillåt alla HTTP-metoder (GET, POST, PUT, DELETE)
+            .AllowAnyMethod()
+            // Tillåt alla headers (Content-Type, Authorization m.m.)
+            .AllowAnyHeader();
 
-        // Tillåt alla HTTP-metoder (GET, POST, PUT, DELETE)
-        .AllowAnyMethod()
-
-        // Tillåt alla headers (Content-Type, Authorization m.m.)
-        .AllowAnyHeader();
-
-    // Om du använder cookies eller auth-token i framtiden:
-    // .AllowCredentials();
+        // Om du använder cookies eller auth-token i framtiden:
+        // .AllowCredentials();
+    });
 });
-
 
 // ------------------------------------------------------------
 // Redo för AI-labb (nästa steg):
@@ -89,6 +85,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("FrontendPolicy");
 app.MapControllers();
 app.Run();

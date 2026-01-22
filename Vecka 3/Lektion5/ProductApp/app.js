@@ -1,4 +1,4 @@
-const API_URL = "https://localhost:5001/api/products";
+const API_URL = "https://localhost:7283/api/products";
 
 const list = document.getElementById("productList");
 const loadBtn = document.getElementById("loadBtn");
