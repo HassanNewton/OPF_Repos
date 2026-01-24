@@ -1,0 +1,14 @@
+@model MovieMVCDemo.Models.Movie
+
+<h1>Add Movie</h1>
+
+<form asp-action="Create" method="post">
+    <label>Title</label>
+    @* asp-for binds input TO the Movie MODEL *@
+    <input asp-for="Title" />
+
+    <label>Year</label>
+    <input asp-for="Year" />
+
+    <button type="submit">Save</button>
+</form>

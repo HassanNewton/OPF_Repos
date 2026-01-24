@@ -1,0 +1,16 @@
+@model List<MovieMVCDemo.Models.Movie>
+
+<h1>@ViewData["Title"]</h1>
+
+@* HERE we USE the list (Model) sent from the Controller *@
+@foreach (var movie in Model)
+{
+    <div>
+        <h3>@movie.Title (@movie.Year)</h3>
+
+        @* HERE we SEND the movie.Id TO the Controller via ROUTE *@
+        <a asp-action="Details" asp-route-id="@movie.Id">Details</a>
+    </div>
+}
+
+<a asp-action="Create">Add new movie</a>
