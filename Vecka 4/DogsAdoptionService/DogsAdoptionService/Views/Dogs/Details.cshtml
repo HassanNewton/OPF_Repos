@@ -1,0 +1,20 @@
+﻿@model DogsAdoptionService.Models.DogModel
+
+<h1>@Model.Name</h1>
+
+<img src="~/images/@Model.Image" alt="@Model.Name" style="max-width:300px;" />
+
+<ul>
+    <li>Cuteness: @Model.Cuteness/10</li>
+    <li>Temperament: @Model.Temperament/10</li>
+    <li>Favourite food: @Model.FavFood</li>
+    <li>Favourite toy: @Model.FavToy</li>
+</ul>
+
+<a asp-controller="Dogs" asp-action="Adopt" asp-route-id="@Model.Id" class="btn btn-primary">
+    Adopt this dog!
+</a>
+
+<a asp-controller="Dogs" asp-action="Index" class="btn btn-secondary">
+    Back to all dogs
+</a>

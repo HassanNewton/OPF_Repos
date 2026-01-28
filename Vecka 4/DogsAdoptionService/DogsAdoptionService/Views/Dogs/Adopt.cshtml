@@ -1,0 +1,29 @@
+﻿@model DogsAdoptionService.Models.DogModel
+
+@{
+    ViewData["Title"] = "Adopted!";
+}
+
+
+<h1>Thank you for adopting @Model.Name!</h1>
+
+<div style="margin-top:20px;">
+    <img src="~/images/@Model.Image" alt="@Model.Name" style="max-width:300px; border-radius:10px;" />
+</div>
+
+<h3>About @Model.Name:</h3>
+
+<ul>
+    <li><strong>Cuteness:</strong> @Model.Cuteness/10</li>
+    <li><strong>Temperament:</strong> @Model.Temperament/10</li>
+    <li><strong>Favourite food:</strong> @Model.FavFood</li>
+    <li><strong>Favourite toy:</strong> @Model.FavToy</li>
+</ul>
+
+<h3 style="color:green;">🎉 Congratulations! 🎉</h3>
+<p>
+    @Model.Name has now officially been adopted.<br />
+    Take good care of your new friend! 🐾
+</p>
+
+<a asp-controller="Dogs" asp-action="Index" class="btn btn-primary">Back to all dogs</a>

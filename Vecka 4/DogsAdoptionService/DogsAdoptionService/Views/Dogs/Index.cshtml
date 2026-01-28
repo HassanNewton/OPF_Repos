@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<DogsAdoptionService.Models.DogModel>
+
+<h1>Cutest Dogs Adoption Service</h1>
+
+<div class="row">
+    @foreach (var dog in Model)
+    {
+        <div class="col-md-4">
+            <div class="card" style="margin-bottom:20px;">
+                <img src="~/images/@dog.Image" class="card-img-top" alt="@dog.Name" />
+                <div class="card-body">
+                    <h5 class="card-title">@dog.Name</h5>
+                    <p>Cuteness: @dog.Cuteness/10</p>
+                    <p>Temperament: @dog.Temperament/10</p>
+
+                    <a asp-controller="Dogs" asp-action="Details" asp-route-id="@dog.Id" class="btn btn-secondary">
+                        View details
+                    </a>
+
+                    @if (!dog.IsAdopted)
+                    {
+                        <a asp-controller="Dogs" asp-action="Adopt" asp-route-id="@dog.Id" class="btn btn-primary">
+                            Adopt dog!
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-success">Already adopted</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
