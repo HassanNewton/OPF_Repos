@@ -8,10 +8,10 @@ namespace DogsAdoptionService.Controllers
     {
         private static List<DogModel> dogs = new List<DogModel>
         {
-            new DogModel{ Id = 1, Name = "Bark Twain", Cuteness = 9, Image = "BarkTwain1.jpg", FavFood = "Barkoni", FavToy = "Barkle", Temperament = 7, IsAdopted = false },
-            new DogModel{ Id = 2, Name = "Sir Waggington", Cuteness = 8, Image = "SirWaggington2.jpg", FavFood = "Pawsta", FavToy = "Fetch Stick", Temperament = 6, IsAdopted = false },
-            new DogModel{ Id = 3, Name = "Furball", Cuteness = 6, Image = "Furball3.jpg", FavFood = "Bone Appetit", FavToy = "Squeaky Ball", Temperament = 8, IsAdopted = false },
-            new DogModel{ Id = 4, Name = "Princess Paws", Cuteness = 10, Image = "PrincessPaws4.jpg", FavFood = "Royal Canin", FavToy = "Diamond Collar", Temperament = 5, IsAdopted = false },
+            new DogModel{ Id = 1, Name = "Bark Twain", Cuteness = 9, Image = "hund1.jpg", FavFood = "Barkoni", FavToy = "Barkle", Temperament = 7, IsAdopted = false },
+            new DogModel{ Id = 2, Name = "Sir Waggington", Cuteness = 8, Image = "hund2.jpg", FavFood = "Pawsta", FavToy = "Fetch Stick", Temperament = 6, IsAdopted = false },
+            new DogModel{ Id = 3, Name = "Furball", Cuteness = 6, Image = "hund3.jpg", FavFood = "Bone Appetit", FavToy = "Squeaky Ball", Temperament = 8, IsAdopted = false },
+            new DogModel{ Id = 4, Name = "Princess Paws", Cuteness = 10, Image = "hund4.jpg", FavFood = "Royal Canin", FavToy = "Diamond Collar", Temperament = 5, IsAdopted = false },
             new DogModel{ Id = 5, Name = "Biscuit", Cuteness = 7, Image = "Biscuit5.jpg", FavFood = "Pupcakes", FavToy = "Chewy Bone", Temperament = 9, IsAdopted = false },
             new DogModel{ Id = 6, Name = "Daisy", Cuteness = 4, Image = "Daisy6.jpg", FavFood = "Doggie Delight", FavToy = "Plush Squirrel", Temperament = 3, IsAdopted = false },
             new DogModel{ Id = 7, Name = "Captain Woof", Cuteness = 6, Image = "CaptainWoof7.jpg", FavFood = "Fish 'n Chips", FavToy = "Nautical Rope", Temperament = 8, IsAdopted = false },
