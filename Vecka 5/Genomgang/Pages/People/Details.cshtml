@@ -1,0 +1,22 @@
+﻿@page
+@model Genomgang.Pages.People.DetailsModel
+@{
+    ViewData["Title"] = "Person Details";
+}
+
+<h1>Person Details</h1>
+
+@if (Model.Person == null)
+{
+    <p>Ingen person hittades.</p>
+}
+else
+{
+    <p><strong>Id:</strong> @Model.Person.Id</p>
+    <p><strong>Name:</strong> @Model.Person.Name</p>
+    <p><strong>Age:</strong> @Model.Person.Age</p>
+    <p><strong>Address:</strong> @Model.Person.Address</p>
+}
+
+<hr />
+<a asp-page="/People">Back to People</a>

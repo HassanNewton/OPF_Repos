@@ -1,0 +1,17 @@
+﻿@page
+@model Genomgang.Pages.MessageModel
+@{
+    ViewData["Title"] = "Message";
+}
+
+<h1>Message</h1>
+
+<p><strong>Text från URL:</strong> @Model.Text</p>
+
+<hr />
+
+<p>Testa att klicka på länkarna:</p>
+
+<a asp-page="/Message" asp-route-text="Hello from the URL">Skicka 'Hello'</a>
+<br />
+<a asp-page="/Message" asp-route-text="Razor Pages is easy">Skicka 'Razor Pages is easy'</a>

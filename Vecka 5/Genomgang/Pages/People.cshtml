@@ -1,0 +1,17 @@
+﻿@page
+@model Genomgang.Pages.PeopleModel
+@{
+    ViewData["Title"] = "People";
+}
+
+<h1>People</h1>
+
+<ul>
+    @foreach (var p in Model.Persons)
+    {
+        <li>
+            @p.Name (@p.Age) - @p.Address
+            | <a asp-page="/People/Details" asp-route-id="@p.Id">Details</a>
+        </li>
+    }
+</ul>

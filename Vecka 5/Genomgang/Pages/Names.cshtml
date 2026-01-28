@@ -1,0 +1,12 @@
+﻿@page
+@model Genomgang.Pages.NamesModel
+@{
+    ViewData["Title"] = "Names";
+}
+
+<h1>Names</h1>
+
+@foreach (var name in Model.Names)
+{
+    <p>@name</p>
+}
