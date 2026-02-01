@@ -1,0 +1,43 @@
+﻿@page
+@model SignUp.Pages.UsersModel
+
+<h2>Create User</h2>
+
+<form method="post">
+    <input type="text" asp-for="Username" placeholder="Username" />
+    <span asp-validation-for="Username"></span>
+
+    <input type="email" asp-for="Email" placeholder="Email" />
+    <span asp-validation-for="Email"></span>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<hr />
+
+<h2>All Users</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+                <td>
+                    <form method="post" asp-page-handler="Delete">
+                        <input type="hidden" name="id" value="@user.Id" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
