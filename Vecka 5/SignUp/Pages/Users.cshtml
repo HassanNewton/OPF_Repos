@@ -32,6 +32,10 @@
                 <td>@user.Username</td>
                 <td>@user.Email</td>
                 <td>
+                    <!-- DETAILS (GET) -->
+                    <a asp-page="Details" asp-route-id="@user.Id">
+                        Details
+                    </a>
                     <form method="post" asp-page-handler="Delete">
                         <input type="hidden" name="id" value="@user.Id" />
                         <button type="submit">Delete</button>
