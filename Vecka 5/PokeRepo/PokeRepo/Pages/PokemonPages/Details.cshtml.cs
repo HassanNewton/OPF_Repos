@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using PokeRepo.Data;
 using PokeRepo.Models;
 using PokeRepo.Services;
@@ -21,22 +22,36 @@ namespace PokeRepo.Pages.PokemonPages
 
         public async Task OnGetAsync(string name)
         {
-            //D�ligt s�tt att h�mta data direkt fr�n API:et Men fungerar f�r demo
+            //Dåligt sätt att hämta data direkt från API:et Men fungerar för demo
 
             //using var httpClient = new HttpClient();
             //var url = $"https://pokeapi.co/api/v2/pokemon/{name.ToLower()}";
 
             //Pokemon = await httpClient.GetFromJsonAsync<PokemonDto>(url);
 
+            //Försök hämta från databasen först
+            var existingPokemon = await _db.Pokemons
+       .FirstOrDefaultAsync(p => p.Name.ToLower() == name.ToLower());
+
+            if (existingPokemon != null)
+            {
+                Pokemon = new PokemonDto
+                {
+                    Id = existingPokemon.PokeApiId,
+                    Name = existingPokemon.Name,
+                    Height = existingPokemon.Height,
+                    Weight = existingPokemon.Weight,
+                    Moves = existingPokemon.Moves
+                };
+                return;
+            }
+
+            // Finns inte → hämta från API
             Pokemon = await _pokeApi.GetPokemonAsync(name);
             if (Pokemon == null)
                 return;
 
-            bool exists = _db.Pokemons.Any(p => p.PokeApiId == Pokemon.Id);
-            if (exists)
-                return;
-
-            //MAPPING H�R
+            // Spara i databasen
             var pokemonModel = new PokemonModel
             {
                 PokeApiId = Pokemon.Id,
