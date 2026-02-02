@@ -1,0 +1,17 @@
+﻿@page
+@model PokeRepo.Pages.PokemonPages.IndexModel
+
+
+<h1>Pokemon List</h1>
+
+
+<ul>
+    @foreach (var pokemon in Model.PokemonNames)
+    {
+        <li>
+            <a asp-page="Details" asp-route-name="@pokemon">
+                @pokemon
+            </a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,34 @@
+﻿@page
+@model PokeRepo.Pages.PokemonPages.DetailsModel
+
+
+
+<h1>@Model.Pokemon?.Name</h1>
+
+@if (Model.Pokemon == null)
+{
+    <p>Kunde inte hämta Pokémon.</p>
+}
+else
+{
+    <ul>
+        <li><strong>ID:</strong> @Model.Pokemon.Id</li>
+        <li><strong>Height:</strong> @Model.Pokemon.Height</li>
+        <li><strong>Weight:</strong> @Model.Pokemon.Weight</li>
+    </ul>
+}
+
+@if (Model.Pokemon != null && Model.Pokemon.Moves.Any())
+{
+    <h2>Moves</h2>
+
+    <ul>
+        @foreach (var move in Model.Pokemon.Moves.Take(10))
+        {
+            <li>@move.Move.Name</li>
+        }
+    </ul>
+}
+
+<a asp-page="Index">⬅ Tillbaka</a>
+

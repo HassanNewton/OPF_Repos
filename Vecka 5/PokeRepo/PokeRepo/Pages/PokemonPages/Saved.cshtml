@@ -1,0 +1,32 @@
+﻿@page
+@model PokeRepo.Pages.PokemonPages.SavedModel
+@{
+}
+<h1>Sparade Pokémon</h1>
+
+@if (!Model.Pokemons.Any())
+{
+    <p>Inga Pokémon har sparats ännu.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Namn</th>
+                <th>Height</th>
+                <th>Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pokemon in Model.Pokemons)
+            {
+                <tr>
+                    <td>@pokemon.Name</td>
+                    <td>@pokemon.Height</td>
+                    <td>@pokemon.Weight</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
