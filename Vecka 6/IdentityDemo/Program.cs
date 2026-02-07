@@ -107,7 +107,11 @@ namespace IdentityDemo
                     await userManager.AddToRoleAsync(admin, "Admin");
                 }
             }
-
+            ///Bättre sätt att göra det på är att skapa en separat klass (IdentitySeeder) som hanterar all seedning av data, och sen anropa den
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    await IdentitySeeder.SeedAdminAsync(scope.ServiceProvider);
+            //}
             app.Run();
         }
     }
