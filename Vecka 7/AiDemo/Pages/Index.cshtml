@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome ask AI</h1>
+
+    <form method="post">
+        <input asp-for="Prompt" class="form-control mb-2" />
+        <button type="submit" class="btn btn-primary">Ask</button>
+    </form>
+
+    @if (Model.Response != null)
+    {
+        <p class="mt-3">@Model.Response</p>
+    }
+</div>
