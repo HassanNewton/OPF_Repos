@@ -1,0 +1,11 @@
+﻿@page "/blue/{id:int}"
+
+<h1 style="color:blue">Blue page</h1>
+<p>Id from URL: @Id</p>
+
+<a href="/">Back</a>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}

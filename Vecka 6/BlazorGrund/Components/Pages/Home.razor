@@ -1,0 +1,62 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+@inject NavigationManager nav
+
+<PageTitle>Home</PageTitle>
+
+<h1>Blazor Demo</h1>
+
+<h2>1. Variabler skrivs ut i HTML</h2>
+<p>Number: @number</p>
+<p style="color:@color">This text changes color</p>
+
+<h2>2. Events (onclick)</h2>
+<button class="btn btn-primary" @onclick="Increment">+1</button>
+<button class="btn btn-primary" @onclick="() => Increment(5)">+5</button>
+<button class="btn btn-primary" @onclick="() => Increment(-1)">-1</button>
+
+@if (number < 0)
+{
+    <p>Can't be negative</p>
+}
+
+<button class="btn btn-primary" @onclick="ChangeColor">Change Color</button>
+
+<h2>3. bind (tvåvägskommunikation)</h2>
+<input @bind="number" />
+<input @bind="color" />
+
+<h2>4. Navigation med href</h2>
+<a href="/red/42">Go to Red with href (42)</a>
+
+<h2>5. Navigation med NavLink</h2>
+<NavLink href="/blue/99">Go to Blue with NavLink (99)</NavLink>
+
+<h2>6. Navigation med NavigationManager (C#)</h2>
+<button class="btn btn-primary" @onclick="GoToRed">Go to Red with C# (7)</button>
+
+@code {
+    private int number = 5;
+    private string color = "red";
+
+    void Increment()
+    {
+        number++;
+    }
+
+    void Increment(int amount)
+    {
+        number += amount;
+    }
+
+    void ChangeColor()
+    {
+        color = color == "red" ? "blue" : "red";
+    }
+
+    void GoToRed()
+    {
+        nav.NavigateTo("/red/7");
+    }
+}

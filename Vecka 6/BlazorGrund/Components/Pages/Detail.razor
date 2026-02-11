@@ -1,0 +1,12 @@
+﻿@page "/details/{id:int}"
+
+<h1>Task Details</h1>
+
+<p>Task ID: @Id</p>
+
+<a href="/">Back</a>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}

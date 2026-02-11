@@ -1,0 +1,69 @@
+﻿@page "/task"
+@rendermode InteractiveServer
+@inject NavigationManager nav
+
+<h1>Mini Task Manager</h1>
+
+<h3>Add Task</h3>
+
+<input @bind="newTaskTitle" placeholder="Write a task..." />
+<button @onclick="AddTask">Add</button>
+
+@if (string.IsNullOrWhiteSpace(newTaskTitle))
+{
+    <p style="color:red">Task title cannot be empty</p>
+}
+
+<h3>Tasks (@tasks.Count)</h3>
+
+<ul>
+    @foreach (var task in tasks)
+    {
+        <li>
+            <span style="text-decoration:@(task.IsDone ? "line-through" : "none")">
+                @task.Title
+            </span>
+
+            <button @onclick="() => ToggleTask(task)">Done</button>
+            <button @onclick="() => GoToDetails(task.Id)">Details</button>
+        </li>
+    }
+</ul>
+
+@code {
+    private string newTaskTitle = "";
+    private List<TaskItem> tasks = new();
+    private int nextId = 1;
+
+    void AddTask()
+    {
+        if (string.IsNullOrWhiteSpace(newTaskTitle))
+            return;
+
+        tasks.Add(new TaskItem
+        {
+            Id = nextId++,
+            Title = newTaskTitle,
+            IsDone = false
+        });
+
+        newTaskTitle = "";
+    }
+
+    void ToggleTask(TaskItem task)
+    {
+        task.IsDone = !task.IsDone;
+    }
+
+    void GoToDetails(int id)
+    {
+        nav.NavigateTo($"/details/{id}");
+    }
+
+    class TaskItem
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public bool IsDone { get; set; }
+    }
+}
