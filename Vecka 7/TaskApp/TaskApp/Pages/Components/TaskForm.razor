@@ -1,20 +1,69 @@
 ﻿@using TaskShared.Model
 
+@* 
+   EditForm = Blazors formulärkomponent.
+
+   Model="model"
+   → formuläret binder till detta objekt.
+
+   OnValidSubmit="Submit"
+   → när formuläret skickas (och är giltigt)
+     körs Submit() i denna komponent.
+*@
 <EditForm Model="model" OnValidSubmit="Submit">
+
+    @* 
+       InputText med two-way binding.
+       @bind-Value kopplar textboxen till model.Title.
+
+       När användaren skriver:
+       → model.Title uppdateras automatiskt.
+    *@
     <InputText @bind-Value="model.Title" placeholder="Title" />
+
+    @* Samma för Description *@
     <InputText @bind-Value="model.Description" placeholder="Description" />
 
+    @* Submit-knapp för formuläret *@
     <button type="submit">Add</button>
+
 </EditForm>
 
 @code {
+
+    @* 
+       Lokalt formulär-state i child.
+       Detta är INTE appens task-lista.
+       Det är bara input-data innan skapande.
+    *@
     private TaskItem model = new();
 
+    @* 
+       EVENT från child → parent.
+
+       Parent (TaskManager) skickar in sin metod:
+         OnCreate="CreateTask"
+
+       När Submit körs anropas parent-metoden.
+    *@
     [Parameter] public EventCallback<TaskItem> OnCreate { get; set; }
 
+
+    @* 
+       Körs när formuläret submitas.
+
+       1. Child säger:
+          "Parent, skapa denna task"
+
+       2. Parent (TaskManager) lägger till via API
+
+       3. Child nollställer formuläret
+    *@
     private async Task Submit()
     {
         await OnCreate.InvokeAsync(model);
+
+        @* Reset formulär efter submit *@
         model = new();
     }
 }
