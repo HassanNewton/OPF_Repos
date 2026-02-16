@@ -1,0 +1,100 @@
+﻿@using TaskShared.Model
+
+@* 
+   Tasks kommer från parent (TaskManager).
+   Child ska bara visa data — inte äga den.
+*@
+@if (Tasks == null || !Tasks.Any())
+{
+    @* Visas om parent ännu inte laddat data eller listan är tom *@
+    <p>No tasks</p>
+}
+else
+{
+    @* 
+       Loopa över Tasks som parent skickat ned.
+       Varje item renderas som en TaskCard (child of this child).
+    *@
+    @foreach (var t in Tasks)
+    {
+        <TaskCard Task="t"
+                  OnDelete="OnDelete"
+                  OnToggle="OnToggle" />
+
+        @* 
+           Viktigt Blazor-mönster:
+           - Task skickas ned till TaskCard
+           - EventCallbacks skickas vidare uppåt
+
+           TaskList fungerar här som en "pass-through":
+           Parent → TaskList → TaskCard
+           Events går tillbaka:
+           TaskCard → TaskList → Parent
+        *@
+    }
+}
+
+@code {
+    @* 
+       DATA-PARAMETER från parent (TaskManager).
+       IEnumerable används eftersom child bara ska läsa/visa.
+       Parent äger List<TaskItem>.
+    *@
+    [Parameter] public IEnumerable<TaskItem> Tasks { get; set; }
+
+    @* 
+       EVENT från TaskCard → parent.
+       TaskList äger inte delete-logik,
+       utan skickar vidare till parent.
+    *@
+    [Parameter] public EventCallback<TaskItem> OnDelete { get; set; }
+
+    @* 
+       EVENT från TaskCard → parent.
+       Parent bestämmer vad toggle betyder.
+    *@
+    [Parameter] public EventCallback<TaskItem> OnToggle { get; set; }
+}
+
+
+@* 
+========================================
+ROLL I KOMPONENTHIERARKIN
+========================================
+
+Parent: TaskManager
+Child:  TaskList
+Grandchild: TaskCard
+
+TaskManager → skickar Tasks + callbacks
+TaskList    → visar lista
+TaskCard    → visar item + triggers events
+
+========================================
+DATAFLÖDE
+========================================
+
+Parent → Child:
+    Tasks
+    OnDelete
+    OnToggle
+
+Child → Parent:
+    via EventCallback
+
+========================================
+DESIGNPRINCIP
+========================================
+
+TaskList:
+  - äger inte state
+  - ändrar inte data
+  - visar bara
+
+Parent:
+  - äger data
+  - ändrar data
+  - pratar med API
+
+========================================
+*@

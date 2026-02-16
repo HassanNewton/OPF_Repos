@@ -1,0 +1,96 @@
+﻿@using TaskShared.Model
+
+@* 
+   TaskCard = CHILD-komponent.
+
+   Den får ett TaskItem från parent (TaskList/TaskManager)
+   och visar information + knappar.
+
+   Viktigt:
+   TaskCard äger INTE datan.
+   Den får den via parameter.
+*@
+<div style="border:1px solid #ccc;padding:8px;margin:4px;">
+
+    @* Visar titel från TaskItem *@
+    <b>@Task.Title</b>
+
+    @* Visar beskrivning *@
+    <div>@Task.Description</div>
+
+    @* 
+       Toggle-knapp:
+       Texten beror på Task.IsDone (state från parent).
+       Child läser state men ändrar den inte direkt.
+    *@
+    <button @onclick="Toggle">
+        @(Task.IsDone ? "Undo" : "Done")
+    </button>
+
+    @* Delete-knapp triggar event upp till parent *@
+    <button @onclick="Delete">
+        Delete
+    </button>
+</div>
+
+@code {
+
+    @* 
+       DATA från parent.
+       Parent skickar ett TaskItem till denna komponent.
+       TaskCard visar bara — äger inte listan.
+    *@
+    [Parameter] public TaskItem Task { get; set; }
+
+    @* 
+       EVENT från child → parent.
+       Parent bestämmer vad "delete" betyder.
+    *@
+    [Parameter] public EventCallback<TaskItem> OnDelete { get; set; }
+
+    @* 
+       EVENT från child → parent.
+       Parent bestämmer vad "toggle" betyder.
+    *@
+    [Parameter] public EventCallback<TaskItem> OnToggle { get; set; }
+
+
+    @* 
+       När användaren klickar Toggle-knappen:
+
+       TaskCard säger:
+       "Parent, toggla denna task"
+
+       InvokeAsync anropar parent-metoden
+       som kopplades via parameter (OnToggle).
+    *@
+    private Task Toggle() => OnToggle.InvokeAsync(Task);
+
+
+    @* 
+       När Delete klickas:
+
+       TaskCard säger:
+       "Parent, ta bort denna task"
+    *@
+    private Task Delete() => OnDelete.InvokeAsync(Task);
+
+
+    @* 
+       Hela eventkedjan i appen:
+
+       User click
+         ↓
+       TaskCard.Toggle()
+         ↓
+       TaskList (pass-through)
+         ↓
+       TaskManager.ToggleTask()
+         ↓
+       API + state update
+         ↓
+       UI re-render
+
+       Detta är EventCallback-mönstret.
+    *@
+}

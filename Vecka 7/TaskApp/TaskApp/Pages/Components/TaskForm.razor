@@ -1,0 +1,20 @@
+﻿@using TaskShared.Model
+
+<EditForm Model="model" OnValidSubmit="Submit">
+    <InputText @bind-Value="model.Title" placeholder="Title" />
+    <InputText @bind-Value="model.Description" placeholder="Description" />
+
+    <button type="submit">Add</button>
+</EditForm>
+
+@code {
+    private TaskItem model = new();
+
+    [Parameter] public EventCallback<TaskItem> OnCreate { get; set; }
+
+    private async Task Submit()
+    {
+        await OnCreate.InvokeAsync(model);
+        model = new();
+    }
+}

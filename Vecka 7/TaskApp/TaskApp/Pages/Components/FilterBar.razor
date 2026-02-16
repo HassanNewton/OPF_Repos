@@ -1,0 +1,14 @@
+﻿
+
+<select @onchange="OnChanged">
+    <option value="all">All</option>
+    <option value="open">Open</option>
+    <option value="done">Done</option>
+</select>
+
+@code {
+    [Parameter] public EventCallback<string> OnFilter { get; set; }
+
+    private Task OnChanged(ChangeEventArgs e)
+        => OnFilter.InvokeAsync(e.Value?.ToString());
+}

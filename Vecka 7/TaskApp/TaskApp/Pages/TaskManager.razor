@@ -1,0 +1,135 @@
+﻿@page "/tasks"
+
+@using TaskApp.Pages.Components
+@using TaskShared.Model
+@using TaskApp.Services
+
+<h2>Task Manager</h2>
+
+@* 
+   TaskForm är en CHILD-komponent.
+   Den skickar ett EventCallback "OnCreate" upp till parent (TaskManager).
+   När formuläret submitas kommer CreateTask i parent att köras.
+*@
+<TaskForm OnCreate="CreateTask" />
+
+@* 
+   FilterBar är också en CHILD.
+   Den skickar valt filter ("all/open/done") upp till parent via EventCallback.
+*@
+<FilterBar OnFilter="SetFilter" />
+
+@* 
+   TaskList är en CHILD som visar data.
+   Parent skickar ned:
+     - Tasks (data)
+     - OnDelete (callback)
+     - OnToggle (callback)
+
+   Viktigt Blazor-mönster:
+   Data går NED (parent → child)
+   Events går UPP (child → parent)
+*@
+<TaskList Tasks="filtered"
+          OnDelete="DeleteTask"
+          OnToggle="ToggleTask" />
+
+@code {
+    @* Injectar service som pratar med API (HTTP) *@
+    [Inject] TaskService Service { get; set; }
+
+    @* STATE: Parent äger hela task-listan *@
+    private List<TaskItem> tasks;
+
+    @* STATE: aktuellt filter som UI använder *@
+    private string filter = "all";
+
+    @* 
+       Lifecycle: körs när komponenten skapas.
+       Här laddar parent initial data från API.
+    *@
+    protected override async Task OnInitializedAsync()
+    {
+        tasks = await Service.GetAll();
+    }
+
+    @* 
+       Derived / computed state.
+       Child (TaskList) får inte hela tasks,
+       utan filtrerad version beroende på filter-state.
+    *@
+    private IEnumerable<TaskItem> filtered =>
+        filter switch
+        {
+            "open" => tasks.Where(t => !t.IsDone),
+            "done" => tasks.Where(t => t.IsDone),
+            _ => tasks
+        };
+
+    @* 
+       EVENT från TaskForm (child).
+       Child säger: "en task skapades".
+       Parent:
+         1. skickar till API via service
+         2. laddar om state
+    *@
+    private async Task CreateTask(TaskItem t)
+    {
+        await Service.Create(t);
+        tasks = await Service.GetAll();
+    }
+
+    @* 
+       EVENT från TaskCard → TaskList → TaskManager.
+       Child säger: "toggle klickades".
+       Parent uppdaterar via API och reloadar state.
+    *@
+    private async Task ToggleTask(TaskItem t)
+    {
+        await Service.Toggle(t);
+        tasks = await Service.GetAll();
+    }
+
+    @* 
+       EVENT från TaskCard (delete).
+       Parent:
+         1. anropar API
+         2. uppdaterar lokal state
+    *@
+    private async Task DeleteTask(TaskItem t)
+    {
+        await Service.Delete(t);
+        tasks.Remove(t);
+    }
+
+    @* 
+       EVENT från FilterBar.
+       Child skickar valt filter.
+       Parent ändrar filter-state → UI renderas om.
+    *@
+    private void SetFilter(string f)
+        => filter = f;
+}
+
+@* 
+========================================
+ARKITEKTUR I DENNA KOMPONENT
+========================================
+
+Parent: TaskManager
+  - äger state (tasks, filter)
+  - pratar med API (via service)
+  - bestämmer UI-data
+
+Children:
+  TaskForm   → create event
+  FilterBar  → filter event
+  TaskList   → visar data
+      TaskCard → toggle/delete event
+
+Dataflöde:
+  Parent → Child = parametrar
+  Child → Parent = EventCallback
+
+========================================
+*@
