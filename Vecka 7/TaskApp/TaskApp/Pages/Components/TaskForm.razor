@@ -11,7 +11,8 @@
      körs Submit() i denna komponent.
 *@
 <EditForm Model="model" OnValidSubmit="Submit">
-
+    @* <DataAnnotationsValidator />
+    <ValidationSummary /> *@
     @* 
        InputText med two-way binding.
        @bind-Value kopplar textboxen till model.Title.
